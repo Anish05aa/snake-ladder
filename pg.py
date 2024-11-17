@@ -60,8 +60,8 @@ while not exitgame:
                 if event.key == pygame.K_RETURN:
                     # Resetting variables for new game
                     gameover = False
-                    snake_x = 10
-                    snake_y = 15
+                    snake_x = 45
+                    snake_y = 55
                     velocity_x = 0
                     velocity_y = 0
                     snk_list = []
@@ -76,19 +76,19 @@ while not exitgame:
                 exitgame = True
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT and velocity_x != -init_velocity:
                     velocity_x = init_velocity
                     velocity_y = 0
 
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT and velocity_x != init_velocity:
                     velocity_x = -init_velocity
                     velocity_y = 0
 
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP and velocity_y != init_velocity:
                     velocity_y = -init_velocity
                     velocity_x = 0
 
-                if event.key == pygame.K_DOWN:
+                if event.key == pygame.K_DOWN and velocity_y != -init_velocity:
                     velocity_y = init_velocity
                     velocity_x = 0
 
@@ -116,9 +116,9 @@ while not exitgame:
         if len(snk_list) > snk_length:
             del snk_list[0]
 
-        # # Check for self-collision
-        # if head in snk_list[:-1]:
-        #     gameover = True
+        # Check for self-collision
+        if head in snk_list[:-1]:
+            gameover = True
 
         gamewindow.fill(white)
         text_screen("Score: " + str(score * 10), red, 5, 5)
